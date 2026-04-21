@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productivity CRM</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Productivity · Gestión de clientes y operaciones</h1>
+      <p>Catálogo · Operación · Dashboard</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="catalogo">Catálogo</button>
+      <button class="tab" data-tab="operacion">Operación</button>
+      <button class="tab" data-tab="dashboard">Dashboard</button>
+      <button class="tab" data-tab="correo">Cuenta de correo</button>
+    </nav>
+
+    <main>
+      <section id="catalogo" class="panel active">
+        <h2>Catálogo</h2>
+
+        <div class="card">
+          <h3>Empresas</h3>
+          <form id="empresa-form" class="grid-form">
+            <label>Empresa / Razón social * <input required name="nombre" type="text" /></label>
+            <label>Estatus
+              <select name="estatus">
+                <option>Activo</option>
+                <option>Baja</option>
+                <option>Por confirmar</option>
+              </select>
+            </label>
+            <label>Contacto principal <input name="contacto" type="text" /></label>
+            <label>Correo del contacto <input name="correoContacto" type="email" /></label>
+            <label>Responsable <input name="responsable" type="text" /></label>
+            <label>Correo del responsable <input name="correoResponsable" type="email" /></label>
+            <label>Correos adicionales (separados por coma)
+              <input name="correosAdicionales" type="text" />
+            </label>
+            <button type="submit">Agregar empresa</button>
+          </form>
+          <table id="empresas-table"></table>
+        </div>
+
+        <div class="card">
+          <h3>Procedimientos</h3>
+          <form id="procedimiento-form" class="inline-form">
+            <input required name="procedimiento" type="text" placeholder="Nuevo procedimiento" />
+            <button type="submit">Agregar</button>
+          </form>
+          <table id="procedimientos-table"></table>
+        </div>
+
+        <div class="card">
+          <h3>Actividades</h3>
+          <form id="actividad-form" class="inline-form">
+            <input required name="actividad" type="text" placeholder="Nueva actividad" />
+            <select name="procedimiento" id="actividad-procedimiento"></select>
+            <button type="submit">Agregar</button>
+          </form>
+          <table id="actividades-table"></table>
+        </div>
+
+        <div class="card">
+          <h3>Importar/Exportar Layout</h3>
+          <p>Descarga plantillas CSV o importa los archivos llenados por los usuarios.</p>
+          <div class="btn-group">
+            <button id="download-layout">Descargar layout</button>
+            <input id="import-file" type="file" accept=".json" />
+          </div>
+        </div>
+      </section>
+
+      <section id="operacion" class="panel">
+        <h2>Módulo Operación</h2>
+        <div class="card">
+          <h3>Agregar registro</h3>
+          <form id="operacion-form" class="grid-form"></form>
+        </div>
+        <div class="card">
+          <h3>Configurar columnas</h3>
+          <div class="inline-form">
+            <select id="available-columns"></select>
+            <button id="add-column">Agregar columna</button>
+          </div>
+          <table id="operacion-table"></table>
+        </div>
+      </section>
+
+      <section id="dashboard" class="panel">
+        <h2>Dashboard</h2>
+        <div class="card">
+          <h3>Por empresa</h3>
+          <table id="dashboard-empresa"></table>
+        </div>
+        <div class="card">
+          <h3>Por procedimiento</h3>
+          <table id="dashboard-procedimiento"></table>
+        </div>
+        <div class="card">
+          <h3>Tarjetas resumen</h3>
+          <div id="kpi-cards" class="kpi-grid"></div>
+        </div>
+      </section>
+
+      <section id="correo" class="panel">
+        <h2>Ligar cuenta de correo</h2>
+        <div class="card">
+          <form id="correo-form" class="grid-form">
+            <label>Proveedor
+              <select name="proveedor">
+                <option>Google Workspace / Gmail</option>
+                <option>Microsoft 365 / Outlook</option>
+                <option>SMTP personalizado</option>
+              </select>
+            </label>
+            <label>Correo emisor * <input required name="email" type="email" /></label>
+            <label>Nombre remitente <input name="senderName" type="text" /></label>
+            <label>Host SMTP <input name="smtpHost" type="text" placeholder="smtp.midominio.com" /></label>
+            <label>Puerto SMTP <input name="smtpPort" type="number" value="587" /></label>
+            <label>Usar TLS <input name="tls" type="checkbox" checked /></label>
+            <button type="submit">Guardar configuración</button>
+          </form>
+          <pre id="correo-status">Sin configurar.</pre>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
